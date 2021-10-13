@@ -1,4 +1,5 @@
-﻿using NFluent;
+﻿using System.Collections.Generic;
+using NFluent;
 using NUnit.Framework;
 using PokerHandsRanker;
 using PokerHandsRanker.Interfaces;
@@ -26,7 +27,13 @@ namespace PokerHandsRankerTests
         [Test]
         public void Should_Draw_A_Card_From_Deck_And_Place_It_In_Hand()
         {
-            // TODO
+            var deck = _deckService.InitDeck();
+            var handP1 = new List<string>();
+            _deckService.DrawCard(handP1, deck);
+            
+            Check.That(deck.Count).IsEqualTo(51);
+            Check.That(handP1.Count).IsEqualTo(1);
+            Check.That(deck).Not.Contains(handP1[0]);
         }
     }
 }
